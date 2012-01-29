@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://www.growit.de/digma/api/rest/namespace"
+           xmlns:c="http://www.growit.de/digma/api/rest/namespace"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+          xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+          jaxb:version="1.0"
+          xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+          jaxb:extensionBindingPrefixes="xjc"
+           xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+           version="${pom.version}"
+          >
+          
+    <xs:element name="SearchResults" type="c:SearchResultsType" />
+    <xs:element name="SearchResult" type="c:SearchResultType" />
+
+	<xs:complexType name="SearchResultsType">
+		<xs:sequence>
+			<xs:element name="result" minOccurs="0" maxOccurs="unbounded" type="c:SearchResultType" />
+		</xs:sequence>
+		<xs:attribute name="duration" type="xs:long" />
+		<xs:attribute name="startNumber" type="xs:long" />
+		<xs:attribute name="endNumber" type="xs:long" />
+		<xs:attribute name="totalNumber" type="xs:long" />
+	</xs:complexType> 
+	
+	<xs:complexType name="SearchResultType">
+		<xs:sequence>
+			<xs:element name="parent" minOccurs="0" maxOccurs="1" type="c:SearchResultType" />
+			<xs:element name="fragment" minOccurs="0" maxOccurs="unbounded" type="c:SearchResultFragment" />
+		</xs:sequence>
+		
+		<xs:attribute name="id" type="xs:long" />
+		<xs:attribute name="type" type="xs:string" />
+		<xs:attribute name="title" type="xs:string" />
+	</xs:complexType>
+	
+	<xs:complexType name="SearchResultFragment">
+		<xs:attribute name="id" type="xs:long" />
+		<xs:attribute name="type" type="xs:string" />
+		<xs:attribute name="title" type="xs:string" />
+		<xs:attribute name="content" type="xs:string" />
+	</xs:complexType>
+</xs:schema>          

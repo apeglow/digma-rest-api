@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://www.growit.de/docmasys/api/rest/namespace"
+           xmlns:c="http://www.growit.de/docmasys/api/rest/namespace"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+          xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+          jaxb:version="1.0"
+          xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+          jaxb:extensionBindingPrefixes="xjc"
+           xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+           version="${pom.version}"
+          >
+          
+	<xs:import namespace="http://www.w3.org/2005/05/xmlmime"
+                schemaLocation="http://www.w3.org/2005/05/xmlmime"/>
+          
+ 
+  <xs:annotation>
+    <xs:appinfo>
+      <jaxb:globalBindings>
+        <xjc:simple />
+      </jaxb:globalBindings>
+    </xs:appinfo>
+  </xs:annotation>
+ 
+ 	<xs:element name="RootElements" type="c:RootElementsType" />
+ 	<xs:element name="Categories" type="c:CategoriesType" />
+ 	<xs:element name="VirtualCategories" type="c:VirtualCategoriesType" />
+	<xs:element name="Category" type="c:CategoryType" />
+	<xs:element name="VirtualCategory" type="c:VirtualCategoryType" />
+	<xs:element name="Documents" type="c:DocumentsType" />
+	<xs:element name="Document" type="c:DocumentType" />
+	<xs:element name="DocumentParts" type="c:DocumentPartsType" />
+	<xs:element name="DocumentPart" type="c:DocumentPartType" />
+	<xs:element name="DocumentPartMetadatas" type="c:DocumentPartMetaDatasType" />
+	<xs:element name="DocumentPartMetadata" type="c:DocumentPartMetaDataType" />
+	<xs:element name="MetaData" type="c:MetaDataType" />
+	<xs:element name="SearchResults" type="c:SearchResultsType" />
+	<xs:element name="SearchResult" type="c:SearchResultType" />
+	<xs:element name="GenericSearchResults" type="c:GenericSearchResultsType" />
+	<xs:element name="GenericSearchResult" type="c:GenericSearchResultType" />
+	<xs:element name="Fragment" type="c:FragmentType" />
+	<xs:element name="DomainObject" type="c:DomainObjectType" />
+	
+	<xs:element name="ServerStatus" type="c:ServerStatusType" />
+	<xs:element name="ServerState" type="c:ServerStateType" />
+	
+	<xs:element name="DocumentSearchResults" type="c:DocumentSearchResultsType" />
+	<xs:element name="DocumentSearchResult" type="c:DocumentSearchResultType" />
+	<xs:element name="FoundFile" type="c:FoundFileType" />
+	<xs:element name="Snapshot" type="c:SnapshotType" />
+	<xs:element name="Users" type="c:UsersType" />
+	<xs:element name="User" type="c:UserType" />
+	<xs:element name="Version" type="c:VersionType" />
+	
+	<xs:element name="Recyclebin" type="c:RecyclebinType" />
+	
+	<xs:element name="ExternalAccountDTO" type="c:ExternalAccountType" />
+	<xs:element name="SendDocumentEMailJobDTO" type="c:SendDocumentEMailJobType" />
+	
+	<xs:element name="DocumentReceiversDTO" type="c:DocumentReceiversType" />
+	<xs:element name="DocumentReceiverDTO" type="c:DocumentReceiverType" />
+	<xs:element name="EmailAddressesDTO" type="c:EmailAddressesType" />
+	<xs:element name="EmailAddressDTO" type="c:EmailAddressType" />
+	
+	
+	<xs:complexType name="RootElementsType">
+		<xs:sequence>
+			<xs:element name="categories" type="c:CategoriesType" />
+			<xs:element name="virtualCategories" type="c:VirtualCategoriesType" />
+		</xs:sequence>
+		<xs:attribute name="withRecyclableElements" type="xs:boolean" />
+	</xs:complexType>
+	
+	<xs:complexType name="CategoriesType">
+			<xs:sequence>
+				<xs:element name="category" minOccurs="0" maxOccurs="unbounded" type="c:CategoryType" />
+			</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="UsersType">
+		<xs:sequence>
+			<xs:element name="user" minOccurs="1" maxOccurs="unbounded" type="c:UserType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="VirtualCategoriesType">
+			<xs:sequence>
+				<xs:element name="virtualCategorie" minOccurs="0" maxOccurs="unbounded" type="c:VirtualCategoryType" />
+			</xs:sequence>
+	</xs:complexType>
+	
+	
+	<xs:complexType name="SnapshotType">
+		<xs:attribute name="running" type="xs:boolean" />
+		<xs:attribute name="worked" type="xs:int" />
+		<xs:attribute name="latest" type="xs:date" />
+		<xs:attribute name="available" type="xs:boolean" />
+	</xs:complexType>
+	
+	<xs:complexType name="CategoryType">
+		<xs:attribute name="id" type="xs:long" />
+		<xs:attribute name="title" type="xs:string" />
+		<xs:attribute name="parentId" type="xs:long" />
+		<xs:attribute name="childOwner" type="xs:boolean" />
+		<xs:attribute name="lastModificationDate" type="xs:date" />
+		<xs:attribute name="special_type" type="xs:string" />
+	</xs:complexType>
+	
+	<xs:complexType name="UserType">
+		<xs:attribute name="id" type="xs:long" />
+		<xs:attribute name="completeName" type="xs:string" />
+		<xs:attribute name="email" type="xs:string" />
+		<xs:attribute name="role" type="xs:string" />
+		<xs:attribute name="growitAccount" type="xs:boolean" />
+		<xs:attribute name="password" type="xs:string" />
+	</xs:complexType>
+	
+	<xs:complexType name="VirtualCategoryType">
+		<xs:attribute name="id" type="xs:long" />
+		<xs:attribute name="title" type="xs:string" />
+		<xs:attribute name="childOwner" type="xs:boolean" />
+	</xs:complexType>
+	
+	<xs:complexType name="DocumentsType">
+			<xs:sequence>
+				<xs:element name="document" minOccurs="0" maxOccurs="unbounded" type="c:DocumentType" />
+			</xs:sequence>
+	</xs:complexType>
+	
+	
+	
+	<xs:complexType name="DocumentType">
+		<xs:attribute name="id" type="xs:long" />
+		<xs:attribute name="categoryId" type="xs:long" />
+		<xs:attribute name="title" type="xs:string" />
+		<xs:attribute name="date" type="xs:date" />
+		<xs:attribute name="archived" type="xs:boolean" />
+		<xs:attribute name="filingPlace" type="xs:string" />
+		<xs:attribute name="resubmissionDate" type="xs:date" />
+		<xs:attribute name="resubmissionReason" type="xs:string" />
+		<xs:attribute name="numberOfFiles" type="xs:int" />
+		<xs:attribute name="lastModificationDate" type="xs:date" />
+	</xs:complexType>
+	
+	
+	<xs:complexType name="DocumentPartsType">
+			<xs:sequence>
+				<xs:element name="documentPart" minOccurs="0" maxOccurs="unbounded" type="c:DocumentPartType" />
+			</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="DocumentPartType">
+    		<xs:sequence>
+      			<xs:element name="metaData" type="c:DocumentPartMetaDataType" />
+      			<xs:element name="content" type="c:BinaryData" />
+    		</xs:sequence>
+  	</xs:complexType>
+	
+	<xs:complexType name="DocumentPartMetaDataType">
+		<xs:attribute name="id" type="xs:long" />
+		<xs:attribute name="name" type="xs:string" />
+		<xs:attribute name="contentType" type="xs:string" />
+		<xs:attribute name="documentId" type="xs:long" />
+		<xs:attribute name="position" type="xs:int" use="optional" />
+		<xs:attribute name="lastModificationDate" type="xs:date" />
+	</xs:complexType>   
+	
+	<xs:complexType name="DocumentPartMetaDatasType">
+			<xs:sequence>
+				<xs:element name="documentPartMetadatas" minOccurs="0" maxOccurs="unbounded" type="c:DocumentPartMetaDataType" />
+			</xs:sequence>
+	</xs:complexType>
+	
+	
+	<xs:complexType name="SearchResultType">
+		<xs:sequence>
+			<xs:element name="categoryPath" minOccurs="1" maxOccurs="unbounded" type="c:CategoryType" />
+		</xs:sequence>
+		<xs:attribute name="documentId" type="xs:long" />
+		<xs:attribute name="documentTitle" type="xs:string" />
+		<xs:attribute name="documentPartId" type="xs:long" />
+		<xs:attribute name="documentPartTitle" type="xs:string" />
+		<xs:attribute name="bestFragment" type="xs:string" />
+		
+	</xs:complexType>
+	
+	<xs:complexType name="SearchResultsType">
+		<xs:sequence>
+			<xs:element name="searchResults" minOccurs="0" maxOccurs="unbounded" type="c:SearchResultType" />
+		</xs:sequence>
+		<xs:attribute name="duration" type="xs:long" />
+		<xs:attribute name="startNumber" type="xs:long" />
+		<xs:attribute name="endNumber" type="xs:long" />
+		<xs:attribute name="totalNumber" type="xs:long" />
+	</xs:complexType>
+	
+	<xs:complexType name="GenericSearchResultsType">
+		<xs:sequence>
+			<xs:element name="result" minOccurs="0" maxOccurs="unbounded" type="c:GenericSearchResultType" />
+		</xs:sequence>
+		<xs:attribute name="duration" type="xs:long" />
+		<xs:attribute name="startNumber" type="xs:long" />
+		<xs:attribute name="endNumber" type="xs:long" />
+		<xs:attribute name="totalNumber" type="xs:long" />
+	</xs:complexType>
+	
+	<xs:complexType name="GenericSearchResultType">
+		<xs:sequence>
+			<xs:element name="domainObject" minOccurs="1" maxOccurs="1" type="c:DomainObjectType" />
+			<xs:element name="fragment" minOccurs="0" maxOccurs="unbounded" type="c:FragmentType" />
+		</xs:sequence>
+		
+		<!-- deprecated since 0.13 -->
+		<xs:attribute name="id" type="xs:long" />
+		<!-- deprecated since 0.13 -->
+		<xs:attribute name="title" type="xs:string" />
+		<!-- deprecated since 0.13 -->
+		<xs:attribute name="bestFragment" type="xs:string" />
+	</xs:complexType>
+	
+	<xs:complexType name="FragmentType">
+		<xs:sequence>
+			<xs:element name="domainObject" type="c:DomainObjectType" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+		<xs:attribute name="content" type="xs:string" />
+	</xs:complexType>
+	
+	<xs:complexType name="DomainObjectType">
+		<xs:sequence>
+			<xs:element name="parent" type="c:DomainObjectType" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:long" />
+		<xs:attribute name="title" type="xs:string" />	
+		<xs:attribute name="type" type="xs:string" />
+	</xs:complexType>
+	
+	
+    <xs:complexType name="BinaryData">
+      <xs:simpleContent>
+        <xs:extension base="xs:base64Binary" />
+        <!-- 
+          <xs:attribute ref="xmime:contentType" use="required"/>
+        </xs:extension>-->
+      </xs:simpleContent>
+    </xs:complexType>
+    
+    <xs:complexType name="MetaDataType">
+    	<xs:sequence>
+    		<xs:element name="filingPlaces" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    		<xs:element name="sendResubmissionReminder" minOccurs="1" maxOccurs="1" type="xs:boolean" />
+    	</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ServerStatusType">
+		<xs:attribute name="minimalVersion" type="xs:int" />
+		<xs:attribute name="currentVersion" type="xs:int" />
+	</xs:complexType>
+	
+	<xs:complexType name="ServerStateType">
+		<xs:sequence>
+			<xs:element name="minimalVersion" type="c:VersionType" />
+			<xs:element name="currentVersion" type="c:VersionType" />
+		</xs:sequence>
+		<xs:attribute name="siteId" type="xs:string" />
+	</xs:complexType>
+	
+	<xs:complexType name="VersionType">
+		<xs:attribute name="major" type="xs:int" />
+		<xs:attribute name="minor" type="xs:int" />
+		<xs:attribute name="patch" type="xs:int" />
+		<xs:attribute name="buildNumber" type="xs:string" />
+	</xs:complexType>
+    
+<xs:complexType name="DocumentSearchResultsType">
+		<xs:sequence>
+			<xs:element name="results" minOccurs="0" maxOccurs="unbounded" type="c:DocumentSearchResultType" />
+		</xs:sequence>
+		<xs:attribute name="duration" type="xs:long" />
+		<xs:attribute name="startNumber" type="xs:long" />
+		<xs:attribute name="endNumber" type="xs:long" />
+		<xs:attribute name="totalNumber" type="xs:long" />
+	</xs:complexType>
+	
+	<xs:complexType name="DocumentSearchResultType">
+		
+		<xs:sequence>
+			<xs:element name="files" minOccurs="0" maxOccurs="unbounded" type="c:FoundFileType" />
+			<xs:element name="categoryPath" minOccurs="1" maxOccurs="unbounded" type="c:CategoryType" />
+		</xs:sequence>
+		
+		<xs:attribute name="documentId" type="xs:long" />
+		<xs:attribute name="documentTitle" type="xs:string" />
+		
+	</xs:complexType>
+	
+	
+	<xs:complexType name="FoundFileType">
+		<xs:attribute name="fileId" type="xs:long" />
+		<xs:attribute name="fileTitle" type="xs:string" />
+		<xs:attribute name="bestFragment" type="xs:string" />
+	</xs:complexType>
+	
+	<xs:complexType name="RecyclebinType">
+		<xs:sequence>
+			<xs:element name="files" type="c:DocumentPartMetaDatasType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="documents" type="c:DocumentsType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="categories" type="c:CategoriesType" minOccurs="1" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ExternalAccountType">
+		<xs:attribute name="login" type="xs:string" />
+		<xs:attribute name="password" type="xs:string" />
+		<xs:attribute name="last_poll" type="xs:date" />
+		<xs:attribute name="last_error" type="xs:string" />
+	</xs:complexType>
+	
+	<xs:complexType name="EmailJobType">
+		<xs:attribute name="receiver" type="xs:string" />
+		<xs:attribute name="subject" type="xs:string" />
+		<xs:attribute name="text" type="xs:string" />
+	</xs:complexType>
+	
+	<xs:complexType name="SendDocumentEMailJobType">
+		<xs:sequence>
+			<xs:element name="emailJob" minOccurs="1" maxOccurs="1"  type="c:EmailJobType" />
+			<xs:element name="documentIds" minOccurs="1" maxOccurs="unbounded" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="DocumentReceiversType">
+		<xs:sequence>
+			<xs:element name="documentReceiver" minOccurs="0" maxOccurs="unbounded" type="c:DocumentReceiverType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="DocumentReceiverType">
+		<xs:attribute name="address" type="xs:string" />
+		<xs:attribute name="sendingDate" type="xs:long" />
+	</xs:complexType>
+	
+	<xs:complexType name="EmailAddressesType">
+		<xs:sequence>
+			<xs:element name="emailAddress" minOccurs="0" maxOccurs="unbounded" type="c:EmailAddressType"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="EmailAddressType">
+		<xs:attribute name="address" type="xs:string" />
+	</xs:complexType>
+
+</xs:schema>

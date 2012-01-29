@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://www.growit.de/docmasys/api/rest/namespace"
+           xmlns:c="http://www.growit.de/docmasys/api/rest/namespace"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+          xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+          jaxb:version="1.0"
+          xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+          jaxb:extensionBindingPrefixes="xjc">
+          
+          
+	
+	
+	<xs:element name="Errors" type="c:ErrorsType" />
+	<xs:element name="Error" type="c:ErrorType" />
+	<xs:element name="RequiredPaymentPackage" type="c:RequiredPaymentPackageType" />
+	
+	<xs:complexType name="RequiredPaymentPackageType">
+		<xs:attribute name="name" type="xs:string" />
+	</xs:complexType>
+  
+
+    <xs:complexType name="ErrorsType">
+    	<xs:sequence>
+    		<xs:element name="errors" minOccurs="0" maxOccurs="unbounded" type="c:ErrorType" />
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ErrorType">
+    	<xs:sequence>
+    		<xs:element name="arguments" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    	</xs:sequence>
+    	<xs:attribute name="key" type="xs:string" />
+    	<xs:attribute name="message" type="xs:string" />
+    	<xs:attribute name="message_pattern" type="xs:string" />
+    
+    </xs:complexType>
+    
+    
+
+          
+</xs:schema>

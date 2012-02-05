@@ -6,7 +6,7 @@
     <groupId>de.growit.digma</groupId>
     <artifactId>rest_api</artifactId>
     <packaging>jar</packaging>
-    <version>0.14.0</version>
+    <version>0.15-SNAPSHOT</version>
     <name>REST API for digma</name>
     <build>
         <finalName>rest_api</finalName>
